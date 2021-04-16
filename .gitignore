@@ -4,3 +4,4 @@ objs
 *.out
 practice
 *.so
+ft_otool

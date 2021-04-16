@@ -22,7 +22,9 @@ LIBS = -L $(LIBFT) -lft\
 	-L $(LIB_SHARED) -lshared
 
 # srcs
-SRCS = text_section.c
+SRCS = text_section.c\
+	print.c\
+	main.c
 
 TEST = ./srcs/*.test.cpp
 
@@ -34,6 +36,22 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 # command
+all: $(NAME)
+
+$(NAME): $(OBJ_DIR) $(OBJS)
+	$(CC) $(CFLAGS) $(INCLUDES) $(LIBS) -o $@ $(OBJS)
+
+clean:
+	rm -rf $(OBJ_DIR)
+
+fclean: clean
+	rm -rf $(NAME)
+
+re: fclean all
+
+$(OBJ_DIR):
+	mkdir -p $@
+
 def = ''
 
 test:
@@ -48,4 +66,4 @@ test:
 		$(filter-out srcs/main.c, $(wildcard srcs/*.c)) $(TEST)\
 		-o $@
 
-.PHONY: test
+.PHONY: test all re clean fclean

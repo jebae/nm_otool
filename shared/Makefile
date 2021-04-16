@@ -5,12 +5,16 @@ NAME = libshared.so
 OBJ_DIR = ./objs
 LIB_DIR = ../libs
 LIBFT = $(LIB_DIR)/libft
+FT_PRINTF = $(LIB_DIR)/ft_printf
 
 # compiler
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -fPIC
-INCLUDES = -I . -I $(LIBFT)/includes
-LIBS = -L $(LIBFT) -lft
+INCLUDES = -I .\
+	-I $(LIBFT)/includes\
+	-I $(FT_PRINTF)/includes
+LIBS = -L $(LIBFT) -lft\
+	-L $(FT_PRINTF) -lftprintf
 
 # srcs
 SRCS = file.c

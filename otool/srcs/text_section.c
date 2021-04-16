@@ -58,7 +58,7 @@ static void	print_by_16byte(
 	i = 0;
 	while (i < block_64byte)
 	{
-		ft_printf("%016x ", section->addr + i * 16);
+		ft_printf("%016llx        ", section->addr + i * 16);
 		j = 0;
 		while (j < 16)
 		{
@@ -80,7 +80,7 @@ static void	print_rest(t_section *section, unsigned char *buf, unsigned long lon
 	if (rest == 0)
 		return ;
 	last_block_offset = block_64byte * 16;
-	ft_printf("%016x ", section->addr + last_block_offset);
+	ft_printf("%016llx        ", section->addr + last_block_offset);
 	i = 0;
 	while (i < rest)
 	{
@@ -90,18 +90,22 @@ static void	print_rest(t_section *section, unsigned char *buf, unsigned long lon
 	ft_printf("\n");
 }
 
-void		print_text_section(unsigned char *file_content)
+int			print_text_section(unsigned char *file_content)
 {
 	t_section			section;
 	unsigned long long	block_64byte;
 	unsigned char		*buf;
 
 	if (!get_text_section(file_content, &section))
-		return ;
+		return (-1);
 	buf = (unsigned char *)ft_memalloc(section.size);
+	if (buf == NULL)
+		return (-1);
 	ft_memcpy(buf, file_content + section.offset, section.size);
+	ft_printf("Contents of (__TEXT, __text) section\n");
 	block_64byte = section.size / 16;
 	print_by_16byte(&section, buf, block_64byte);
 	print_rest(&section, buf, block_64byte);
 	ft_memdel((void **)&buf);
+	return (0);
 }

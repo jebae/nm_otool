@@ -25,7 +25,7 @@ typedef struct load_command			t_load_command;
 typedef struct segment_command_64	t_segment_command;
 typedef struct section_64			t_section;
 
-unsigned char	*read_file(const char *filename);
+unsigned char	*read_file(const char *filename, struct stat *st);
 int				get_file_type(unsigned char *file_content);
 
 #endif

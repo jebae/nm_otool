@@ -1,21 +1,20 @@
 #include "shared.h"
 
-unsigned char	*read_file(const char *filename)
+unsigned char	*read_file(const char *filename, struct stat *st)
 {
 	int				fd;
-	struct stat		st;
 	unsigned char	*content;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
-	if (fstat(fd, &st) != 0)
+	if (fstat(fd, st) != 0)
 	{
 		close(fd);
 		return (NULL);
 	}
 	content = (unsigned char *)mmap(
-		NULL, st.st_size, PROT_READ, MAP_SHARED, fd, 0);
+		NULL, st->st_size, PROT_READ, MAP_SHARED, fd, 0);
 	if (content == MAP_FAILED)
 		return (NULL);
 	close(fd);

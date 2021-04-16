@@ -13,7 +13,7 @@ TEST(read_file, file_exist)
 	buf = (unsigned char *)malloc(st.st_size);
 	read(fd, buf, st.st_size);
 
-	content = read_file(filename);
+	content = read_file(filename, &st);
 
 	ASSERT_EQ(memcmp(content, buf, st.st_size), 0);
 
@@ -26,8 +26,9 @@ TEST(read_file, file_not_exist)
 {
 	const char		*filename = (const char *)"not_exist";
 	unsigned char	*content;
+	struct stat		st;
 
-	content = read_file(filename);
+	content = read_file(filename, &st);
 
 	ASSERT_EQ((long)content, NULL);
 }

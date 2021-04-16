@@ -10,6 +10,7 @@ extern "C"
 }
 #endif
 
-void		print_text_section(unsigned char *file_content);
+int		print_text_section(unsigned char *file_content);
+int		print(const char *filename);
 
 #endif
