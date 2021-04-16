@@ -1,0 +1,6 @@
+.vscode
+test
+objs
+*.out
+practice
+*.so
