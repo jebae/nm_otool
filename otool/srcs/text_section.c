@@ -1,7 +1,7 @@
 #include "otool.h"
 # include <stdio.h>
 
-static int	extract_text_section(
+static int	extract_text_section_from_segment(
 	unsigned char *file_content, long long offset,
 	unsigned int nsects, t_section *section)
 {
@@ -37,7 +37,7 @@ static int	get_text_section(unsigned char *file_content, t_section *section)
 		if (lc.cmd == LC_SEGMENT_64)
 		{
 			ft_memcpy(&sc, file_content + offset, sizeof(t_segment_command));
-			if (extract_text_section(
+			if (extract_text_section_from_segment(
 				file_content, offset + sizeof(t_segment_command),
 				sc.nsects, section))
 				return (1);
