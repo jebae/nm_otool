@@ -1,5 +1,4 @@
 #include "otool.h"
-# include <stdio.h>
 
 static int	extract_text_section_from_segment(
 	unsigned char *file_content, long long offset,
