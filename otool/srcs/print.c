@@ -1,18 +1,10 @@
 #include "otool.h"
 
-static int	handle_err(unsigned char *content, long long size)
-{
-	munmap(content, size);
-	return (-1);
-}
-
 static int	print_macho(
-	const char *filename, unsigned char *content, long long size)
+	const char *filename, unsigned char *content)
 {
 	ft_printf("%s:\n", filename);
-	if (print_text_section(content) == -1)
-		return (handle_err(content, size));
-	return (0);
+	return (print_text_section(content));
 }
 
 static int	print_archive(
@@ -38,7 +30,7 @@ static int	print_archive(
 		while (*(unsigned int *)ptr != 0xfeedfacf)
 			ptr += 4;
 		if (print_text_section(ptr) == -1)
-			return (handle_err(content, size));
+			return (-1);
 		i += ft_atoull(ar.ar_size);
 	}
 	return (0);
@@ -47,6 +39,7 @@ static int	print_archive(
 int			print(const char *filename)
 {
 	int				type;
+	int				res;
 	unsigned char	*content;
 	struct stat		st;
 
@@ -58,13 +51,15 @@ int			print(const char *filename)
 	}
 	type = get_file_type(content);
 	if (type == SH_FILE_TYPE_MACHO)
-		return (print_macho(filename, content, st.st_size));
+		res = print_macho(filename, content);
 	else if (type == SH_FILE_TYPE_ARCHIVE)
-		return (print_archive(filename, content, st.st_size));
+		res = print_archive(filename, content, st.st_size);
 	else
 	{
 		ft_printf("ft_otool: %s: is not an object file\n", filename);
-		return (handle_err(content, st.st_size));
+		res = -1;
 	}
+	munmap(content, st.st_size);
+	return res;
 }
 
