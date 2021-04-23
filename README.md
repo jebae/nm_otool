@@ -43,17 +43,17 @@ make otool
 
 ## Usage
 
->💡 `nm` and `otool` uses several function as shared library from `./shared/shared.so`.
+>💡 `nm` and `otool` uses several function as shared library from `./shared/libshared.so`.
 > Don't forget to set environment variable before execute program.
-> `DYLD_LIBRARY_PATH=<shared.so path> ./ft_nm ...`
-> `DYLD_LIBRARY_PATH=<shared.so path> ./ft_otool ...`
+> `DYLD_LIBRARY_PATH=<libshared.so path> ./ft_nm ...`
+> `DYLD_LIBRARY_PATH=<libshared.so path> ./ft_otool ...`
 
 <br/>
 
 ### nm
 
 ```
-nm [mach-o file name | archive file name]
+./ft_nm [mach-o file name | archive file name]
 
 # execute file
 ./ft_nm a.out
@@ -89,22 +89,22 @@ $> DYLD_LIBRARY_PATH=shared ./nm/ft_nm ./nm/objs/sym_list.o
 ### otool
 
 ```
-otool [mach-o file name | archive file name]
+./ft_otool [mach-o file name | archive file name]
 
 # execute file
-./otool a.out
+./ft_otool a.out
 
 # object file
-./otool obj.o
+./ft_otool obj.o
 
 # shared library
-./otool dylib.so
+./ft_otool dylib.so
 
 # archive file
-./otool libft.a
+./ft_otool libft.a
 
 # multiple argument
-./otool libft.a a.out dylib.so
+./ft_otool libft.a a.out dylib.so
 
 e.g.
 $> DYLD_LIBRARY_PATH=shared ./otool/ft_otool ./otool/objs/main.o
