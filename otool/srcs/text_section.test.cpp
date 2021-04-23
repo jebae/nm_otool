@@ -28,8 +28,8 @@ protected:
 
 	void	print_ft_otool(const char *filename)
 	{
-		unsigned char	*content = read_file(filename);
 		struct stat		st;
+		unsigned char	*content = read_file(filename, &st);
 
 		lstat(filename, &st);
 		print_text_section(content);
@@ -42,5 +42,5 @@ TEST_F(PrintTextSection, DISABLED_macho)
 	const char *filename = (const char *)"/bin/cp";
 
 	print_ft_otool(filename);
-	// print_real_otool(filename);
+	print_real_otool(filename);
 }

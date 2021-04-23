@@ -5,3 +5,4 @@ objs
 practice
 *.so
 ft_otool
+ft_nm

@@ -27,13 +27,13 @@ typedef struct segment_command_64	t_segment_command;
 typedef struct section_64			t_section;
 
 typedef struct						s_ar_hdr {
-	char pad1[13];
-	char ar_date[12];
-	char ar_uid[6];
-	char ar_gid[6];
-	char ar_mode[8];
-	char ar_size[10];
-	char pad2[2];
+	char	pad1[13];
+	char	ar_date[12];
+	char	ar_uid[6];
+	char	ar_gid[6];
+	char	ar_mode[8];
+	char	ar_size[10];
+	char	pad2[2];
 }									t_ar_header;
 
 unsigned char	*read_file(const char *filename, struct stat *st);
