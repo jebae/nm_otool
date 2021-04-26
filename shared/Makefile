@@ -32,6 +32,8 @@ $(OBJ_DIR)/%.o: %.c
 all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJS)
+	$(MAKE) -C $(LIBFT)
+	$(MAKE) -C $(FT_PRINTF)
 	$(CC) $(CFLAGS) $(INCLUDES) $(LIBS) -shared -o $@ $(OBJS)
 
 $(OBJ_DIR):

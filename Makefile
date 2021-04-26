@@ -2,6 +2,8 @@ NM_DIR = ./nm
 OTOOL_DIR = ./otool
 SHARED_DIR = ./shared
 
+all: shared nm otool
+
 shared:
 	$(MAKE) -C $(SHARED_DIR)
 
@@ -10,8 +12,6 @@ nm: shared
 
 otool: shared
 	$(MAKE) -C $(OTOOL_DIR)
-
-all: shared nm otool
 
 clean:
 	$(MAKE) -C $(SHARED_DIR) clean
